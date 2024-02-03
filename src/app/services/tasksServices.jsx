@@ -1,10 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { base_url } from "../../firebase/db";
 
-export const taskApi = createApi({
-  reducerPath: "taskApi",
+export const tasksApi = createApi({
+  reducerPath: "tasksApi",
   baseQuery: fetchBaseQuery({ baseUrl: base_url }),
-  endpoints: (builder) => ({}),
+  endpoints: (builder) => ({
+    getTasks: builder.query({
+      query: () => `tasks.json`,
+    }),
+  }),
 });
 
-export const {} = taskApi;
+export const { useGetTasksQuery } = tasksApi;
