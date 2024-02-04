@@ -4,7 +4,7 @@ import TaskCard from "../components/TaskCard";
 import { useGetTasksQuery } from "../app/services/tasksServices";
 
 const TasksScreen = () => {
-  const [task] = useGetTasksQuery();
+  const { task } = useGetTasksQuery();
   console.log(task);
   return (
     <View>
