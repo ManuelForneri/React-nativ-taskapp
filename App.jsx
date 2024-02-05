@@ -2,8 +2,8 @@ import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { fonts } from "./src/global/fonts";
 import MainNavigator from "./src/navigations/MainNavigator";
-import store from "./src/app/store";
 import { Provider } from "react-redux";
+import { store } from "./src/app/store";
 
 const App = () => {
   const [fontsLoader] = useFonts(fonts);

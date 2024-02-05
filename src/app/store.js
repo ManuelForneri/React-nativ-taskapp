@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../features/counter/counterSlice";
-import { tasksApi } from "./services/tasksServices";
 import { setupListeners } from "@reduxjs/toolkit/query";
+
+import { tasksApi } from "../services/tasksServices";
 
 export const store = configureStore({
   reducer: {
@@ -11,4 +12,5 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(tasksApi.middleware),
 });
+
 setupListeners(store.dispatch);

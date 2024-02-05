@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import TaskCard from "../components/TaskCard";
-import { useGetTasksQuery } from "../app/services/tasksServices";
+import { useGetTasksQuery } from "../services/tasksServices";
 
 const TasksScreen = () => {
-  const { task } = useGetTasksQuery();
-  console.log(task);
+  const { data, error, isLoading } = useGetTasksQuery();
+
+  if (!isLoading) console.log(data);
   return (
     <View>
       <TaskCard />
