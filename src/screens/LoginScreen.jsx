@@ -1,40 +1,60 @@
-import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-const LoginScreen = () => {
-  const { control, handleSubmit, errors } = useForm();
+const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const onSubmit = (data) => {
+  const handleLogin = () => {
     // Lógica de autenticación aquí (por ejemplo, llamada a una API).
-    console.log("Datos de inicio de sesión:", data);
+    console.log("Correo electrónico:", email);
+    console.log("Contraseña:", password);
   };
 
   return (
-    <View>
-      <Controller
-        control={control}
-        name="email"
-        rules={{ required: true, pattern: /^\S+@\S+$/i }}
-        render={({ field }) => (
-          <TextInput {...field} placeholder="Correo electrónico" />
-        )}
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Correo electrónico"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
       />
-      {errors.email && <Text>Ingresa un correo válido</Text>}
-
-      <Controller
-        control={control}
-        name="password"
-        rules={{ required: true }}
-        render={({ field }) => (
-          <TextInput {...field} placeholder="Contraseña" secureTextEntry />
-        )}
+      <TextInput
+        style={styles.input}
+        placeholder="Contraseña"
+        secureTextEntry
+        value={password}
+        onChangeText={(text) => setPassword(text)}
       />
-      {errors.password && <Text>Ingresa una contraseña</Text>}
-
-      <Button title="Iniciar sesión" onPress={handleSubmit(onSubmit)} />
+      <Button title="Iniciar sesión" onPress={handleLogin} />
+      <Text style={styles.link} onPress={() => navigation.navigate("Register")}>
+        ¿No tienes cuenta? Regístrate aquí
+      </Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    marginBottom: 16,
+    paddingHorizontal: 12,
+  },
+  link: {
+    color: "blue",
+    textDecorationLine: "underline",
+    marginTop: 8,
+  },
+});
 
 export default LoginScreen;

@@ -1,50 +1,77 @@
-import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-const RegisterScreen = () => {
-  const { control, handleSubmit, errors } = useForm();
+const RegisterScreen = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
 
-  const onSubmit = (data) => {
+  const handleRegister = () => {
     // Lógica de registro aquí (por ejemplo, llamada a una API).
-    console.log("Datos de registro:", data);
+    console.log("Nombre:", name);
+    console.log("Correo electrónico:", email);
+    console.log("Contraseña:", password);
+    console.log("Repetir contraseña:", repeatPassword);
   };
 
   return (
-    <View>
-      <Controller
-        control={control}
-        name="name"
-        rules={{ required: true }}
-        render={({ field }) => (
-          <TextInput {...field} placeholder="Nombre completo" />
-        )}
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Nombre completo"
+        value={name}
+        onChangeText={(text) => setName(text)}
       />
-      {errors.name && <Text>Ingresa tu nombre</Text>}
-
-      <Controller
-        control={control}
-        name="email"
-        rules={{ required: true, pattern: /^\S+@\S+$/i }}
-        render={({ field }) => (
-          <TextInput {...field} placeholder="Correo electrónico" />
-        )}
+      <TextInput
+        style={styles.input}
+        placeholder="Correo electrónico"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
       />
-      {errors.email && <Text>Ingresa un correo válido</Text>}
-
-      <Controller
-        control={control}
-        name="password"
-        rules={{ required: true }}
-        render={({ field }) => (
-          <TextInput {...field} placeholder="Contraseña" secureTextEntry />
-        )}
+      <TextInput
+        style={styles.input}
+        placeholder="Contraseña"
+        secureTextEntry
+        value={password}
+        onChangeText={(text) => setPassword(text)}
       />
-      {errors.password && <Text>Ingresa una contraseña</Text>}
-
-      <Button title="Registrarse" onPress={handleSubmit(onSubmit)} />
+      <TextInput
+        style={styles.input}
+        placeholder="Repetir contraseña"
+        secureTextEntry
+        value={repeatPassword}
+        onChangeText={(text) => setRepeatPassword(text)}
+      />
+      <Button title="Registrarse" onPress={handleRegister} />
+      <Text style={styles.link} onPress={() => navigation.navigate("Login")}>
+        ¿Ya tienes cuenta? Inicia sesión aquí
+      </Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    marginBottom: 16,
+    paddingHorizontal: 12,
+  },
+  link: {
+    color: "blue",
+    textDecorationLine: "underline",
+    marginTop: 8,
+  },
+});
 
 export default RegisterScreen;
