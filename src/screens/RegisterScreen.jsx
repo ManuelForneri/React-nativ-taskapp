@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { useSignupMutation } from "../services/authServices";
 
 const RegisterScreen = ({ navigation }) => {
+  const [triggerSignup, { data, isError, isSuccess, error, isLoading }] =
+    useSignupMutation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +16,7 @@ const RegisterScreen = ({ navigation }) => {
     console.log("Correo electrónico:", email);
     console.log("Contraseña:", password);
     console.log("Repetir contraseña:", repeatPassword);
+    triggerSignup({ email, password });
   };
 
   return (

@@ -13,8 +13,7 @@ const App = () => {
     <>
       <StatusBar style="auto" />
       <Provider store={store}>
-        {/* <MainNavigator /> */}
-        <LoginScreen />
+        <MainNavigator />
       </Provider>
     </>
   );
