@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useSignupMutation } from "../services/authServices";
 
@@ -10,13 +10,23 @@ const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    }
+    if (error) {
+      console.log(error);
+    }
+  }, [data, isError, isSuccess]);
+
   const handleRegister = () => {
     // Lógica de registro aquí (por ejemplo, llamada a una API).
-    console.log("Nombre:", name);
-    console.log("Correo electrónico:", email);
-    console.log("Contraseña:", password);
-    console.log("Repetir contraseña:", repeatPassword);
+
     triggerSignup({ email, password });
+    setEmail("");
+    setName("");
+    setPassword("");
+    setRepeatPassword("");
   };
 
   return (
