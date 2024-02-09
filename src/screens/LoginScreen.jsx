@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { useLoginMutation } from "../services/authServices";
 
 const LoginScreen = ({ navigation }) => {
+  const [triggerSignin, { data, isError, isSuccess, error, isLoading }] =
+    useLoginMutation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    }
+    if (error) {
+      console.log(error);
+    }
+  }, [data, isError, isSuccess]);
 
   const handleLogin = () => {
     // Lógica de autenticación aquí (por ejemplo, llamada a una API).
     console.log("Correo electrónico:", email);
     console.log("Contraseña:", password);
+    triggerSignin({ email, password });
   };
 
   return (
