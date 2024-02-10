@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useLoginMutation } from "../services/authServices";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/auth/authSlice";
 
 const LoginScreen = ({ navigation }) => {
   const [triggerSignin, { data, isError, isSuccess, error, isLoading }] =
     useLoginMutation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (data) {
       console.log(data);
+      dispatch(setUser(data));
     }
     if (error) {
       console.log(error);

@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../features/counter/counterSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
+import counterReducer from "../features/counter/counterSlice";
 import { tasksApi } from "../services/tasksServices";
 import { authApi } from "../services/authServices";
+import authReducer from "../features/auth/authSlice";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    auth: authReducer,
     [tasksApi.reducerPath]: tasksApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
   },
