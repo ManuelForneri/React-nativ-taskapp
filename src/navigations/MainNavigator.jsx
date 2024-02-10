@@ -1,10 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
-import Navigator from "./Navigator";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import AuthStack from "./AuthStack";
+import Navigator from "./Navigator";
 
 const MainNavigator = () => {
-  const [idToken, setIdToken] = useState("");
+  const idToken = useSelector((state) => state.auth.value.idToken);
   return (
     <NavigationContainer>
       {idToken ? <Navigator /> : <AuthStack />}

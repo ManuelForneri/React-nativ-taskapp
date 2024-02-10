@@ -4,13 +4,19 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     value: {
-      mail: null,
+      email: null,
       idToken: null,
     },
   },
-  reducers: {},
+  reducers: {
+    setUser: (state, action) => {
+      state.value.email = action.payload.email;
+      state.value.idToken = action.payload.idToken;
+    },
+  },
 });
 
-export const {} = authSlice.actions;
+// Action creators are generated for each case reducer function
+export const { setUser } = authSlice.actions;
 
 export default authSlice.reducer;
