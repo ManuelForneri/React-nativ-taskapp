@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useSignupMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
+import { signupSchema } from "../validations/signupSchema";
 
 const RegisterScreen = ({ navigation }) => {
   const [triggerSignup, { data, isError, isSuccess, error, isLoading }] =
@@ -24,13 +25,17 @@ const RegisterScreen = ({ navigation }) => {
   }, [data, isError, isSuccess]);
 
   const handleRegister = () => {
-    // Lógica de registro aquí (por ejemplo, llamada a una API).
-
-    triggerSignup({ email, password });
-    setEmail("");
-    setName("");
-    setPassword("");
-    setRepeatPassword("");
+    try {
+      signupSchema.validateSync({ email, password, repeatPassword });
+      triggerSignup({ email, password });
+      setEmail("");
+      setName("");
+      setPassword("");
+      setRepeatPassword("");
+    } catch (error) {
+      console.log(error.path);
+      console.log(error.message);
+    }
   };
 
   return (
