@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useSignupMutation } from "../services/authServices";
-import { useDispatch } from "react-redux";
-import { setUser } from "../features/auth/authSlice";
 
 const RegisterScreen = ({ navigation }) => {
   const [triggerSignup, { data, isError, isSuccess, error, isLoading }] =
@@ -11,12 +9,10 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (data) {
       console.log(data);
-      dispatch(setUser(data));
     }
     if (error) {
       console.log(error);
