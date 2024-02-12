@@ -1,9 +1,9 @@
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import AnnotationsScreen from "../screens/AnnotationsScreen";
-import DebtScreen from "../screens/DebtScreen";
+import AnnotationsStack from "./AnnotationsStack";
+import DebtStack from "./DebtStack";
+import ProfileStack from "./ProfileStack";
 import TasksStack from "./TasksStack";
-import { FontAwesome } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -21,7 +21,7 @@ const Navigator = () => {
       />
       <Tab.Screen
         name="Deudas"
-        component={DebtScreen}
+        component={DebtStack}
         options={{
           tabBarIcon: () => (
             <MaterialIcons name="attach-money" size={24} color="black" />
@@ -30,9 +30,16 @@ const Navigator = () => {
       />
       <Tab.Screen
         name="Anotador"
-        component={AnnotationsScreen}
+        component={AnnotationsStack}
         options={{
           tabBarIcon: () => <FontAwesome name="book" size={24} color="black" />,
+        }}
+      />
+      <Tab.Screen
+        name="Perfil"
+        component={ProfileStack}
+        options={{
+          tabBarIcon: () => <FontAwesome name="user" size={24} color="black" />,
         }}
       />
     </Tab.Navigator>
