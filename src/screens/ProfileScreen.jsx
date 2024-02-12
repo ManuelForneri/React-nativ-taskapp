@@ -1,27 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Avatar, Button, Divider } from "react-native-elements";
+import { useSelector } from "react-redux";
+import { useGetProfileImageQuery } from "../services/authServices";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
+  const localId = useSelector((state) => state.auth.value.localId);
+  const { data } = useGetProfileImageQuery(localId);
   return (
     <View style={styles.container}>
       <Avatar
         rounded
-        size="large"
-        source={{
-          uri: "https://example.com/your-profile-image.jpg", // URL de la imagen de perfil
-        }}
+        size="xlarge"
+        source={data ? { uri: data.image } : require("../../assets/user.png")}
       />
-      <Text style={styles.username}>Usuario123</Text>
-      <Text style={styles.bio}>
-        ¡Bienvenido a mi perfil! Soy un apasionado de la programación.
-      </Text>
+
       <Divider style={styles.divider} />
       <Button
         title="Editar perfil"
-        onPress={() => console.log("Editar perfil presionado")}
+        onPress={() => navigation.navigate("Editar Perfil")}
       />
-      {/* Agrega más componentes según tus necesidades */}
     </View>
   );
 };

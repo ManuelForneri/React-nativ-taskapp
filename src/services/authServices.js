@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { api_key, auth_base_url } from "../firebase/db";
+import { api_key, auth_base_url, base_url } from "../firebase/db";
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ baseUrl: auth_base_url }),
+  tagTypes: ["image"],
   endpoints: (builder) => ({
     Signup: builder.mutation({
       query: (user) => ({
@@ -19,7 +20,24 @@ export const authApi = createApi({
         body: user,
       }),
     }),
+    postProfileImage: builder.mutation({
+      query: ({ localId, image }) => ({
+        url: base_url + `profileImage/${localId}.json`,
+        method: "PUT",
+        body: { image },
+      }),
+      invalidatesTags: ["image"],
+    }),
+    getProfileImage: builder.query({
+      query: (localId) => base_url + `profileImage/${localId}.json`,
+      providesTags: ["image"],
+    }),
   }),
 });
 
-export const { useSignupMutation, useLoginMutation } = authApi;
+export const {
+  useSignupMutation,
+  useLoginMutation,
+  usePostProfileImageMutation,
+  useGetProfileImageQuery,
+} = authApi;
