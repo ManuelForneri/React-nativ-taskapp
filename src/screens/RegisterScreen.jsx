@@ -12,6 +12,10 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorName, setErrorName] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorRepeatPass, setErrorRepeatPass] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,8 +37,23 @@ const RegisterScreen = ({ navigation }) => {
       setPassword("");
       setRepeatPassword("");
     } catch (error) {
+      setErrorEmail("");
+      setErrorName("");
+      setErrorPassword("");
+      setErrorRepeatPass("");
       console.log(error.path);
       console.log(error.message);
+      switch (error.path) {
+        case "email":
+          setErrorEmail(error.message);
+          break;
+        case "password":
+          setErrorPassword(error.message);
+          break;
+        case "repeatPassword":
+          setErrorRepeatPass(error.message);
+          break;
+      }
     }
   };
 
@@ -46,12 +65,14 @@ const RegisterScreen = ({ navigation }) => {
         value={name}
         onChangeText={(text) => setName(text)}
       />
+      <Text style={styles.errorMsg}>{errorName}</Text>
       <TextInput
         style={styles.input}
         placeholder="Correo electrónico"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
+      <Text style={styles.errorMsg}>{errorEmail}</Text>
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
@@ -59,6 +80,7 @@ const RegisterScreen = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
+      <Text style={styles.errorMsg}>{errorPassword}</Text>
       <TextInput
         style={styles.input}
         placeholder="Repetir contraseña"
@@ -66,6 +88,7 @@ const RegisterScreen = ({ navigation }) => {
         value={repeatPassword}
         onChangeText={(text) => setRepeatPassword(text)}
       />
+      <Text style={styles.errorMsg}>{errorRepeatPass}</Text>
       <Button title="Registrarse" onPress={handleRegister} />
       <Text style={styles.link} onPress={() => navigation.navigate("Login")}>
         ¿Ya tienes cuenta? Inicia sesión aquí
@@ -87,13 +110,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
-    marginBottom: 16,
+
     paddingHorizontal: 12,
   },
   link: {
     color: "blue",
     textDecorationLine: "underline",
     marginTop: 8,
+  },
+  errorMsg: {
+    color: "red",
   },
 });
 
