@@ -6,12 +6,13 @@ import { useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/authServices";
 import { Button } from "react-native-elements";
 import { usePostProfileImageMutation } from "../services/authServices";
+import MyLoader from "../components/MyLoader";
 
 const ImageSelector = ({ navigation }) => {
   const [image, setImage] = useState("");
   const [triggerProfileImage] = usePostProfileImageMutation();
   const localId = useSelector((state) => state.auth.value.localId);
-  const { data, isSuccess } = useGetProfileImageQuery(localId);
+  const { data, isSuccess, isLoading } = useGetProfileImageQuery(localId);
 
   useEffect(() => {
     if (isSuccess && data) setImage(data.image);
@@ -25,7 +26,7 @@ const ImageSelector = ({ navigation }) => {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 0.3,
+        quality: 0.5,
         base64: true,
       });
 
@@ -40,15 +41,21 @@ const ImageSelector = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={image ? { uri: image } : require("../../assets/user.png")}
-        style={styles.image}
-        resizeMode="cover"
-      />
-      <Button title="Tomar foto" onPress={pickImage} />
-      <Button title="Confirmar" onPress={confirmImage} />
-    </View>
+    <>
+      {isLoading ? (
+        <MyLoader />
+      ) : (
+        <View style={styles.container}>
+          <Image
+            source={image ? { uri: image } : require("../../assets/user.png")}
+            style={styles.image}
+            resizeMode="cover"
+          />
+          <Button title="Tomar foto" onPress={pickImage} />
+          <Button title="Confirmar" onPress={confirmImage} />
+        </View>
+      )}
+    </>
   );
 };
 
@@ -59,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     marginTop: 20,
+    gap: 10,
   },
   image: {
     width: 200,

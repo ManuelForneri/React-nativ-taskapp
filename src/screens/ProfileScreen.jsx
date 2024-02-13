@@ -3,24 +3,33 @@ import { View, Text, StyleSheet } from "react-native";
 import { Avatar, Button, Divider } from "react-native-elements";
 import { useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/authServices";
+import MyLoader from "../components/MyLoader";
 
 const ProfileScreen = ({ navigation }) => {
   const localId = useSelector((state) => state.auth.value.localId);
-  const { data } = useGetProfileImageQuery(localId);
+  const { data, isLoading } = useGetProfileImageQuery(localId);
   return (
-    <View style={styles.container}>
-      <Avatar
-        rounded
-        size="xlarge"
-        source={data ? { uri: data.image } : require("../../assets/user.png")}
-      />
+    <>
+      {isLoading ? (
+        <MyLoader />
+      ) : (
+        <View style={styles.container}>
+          <Avatar
+            rounded
+            size="xlarge"
+            source={
+              data ? { uri: data.image } : require("../../assets/user.png")
+            }
+          />
 
-      <Divider style={styles.divider} />
-      <Button
-        title="Editar perfil"
-        onPress={() => navigation.navigate("Editar Perfil")}
-      />
-    </View>
+          <Divider style={styles.divider} />
+          <Button
+            title="Editar perfil"
+            onPress={() => navigation.navigate("Editar Perfil")}
+          />
+        </View>
+      )}
+    </>
   );
 };
 
