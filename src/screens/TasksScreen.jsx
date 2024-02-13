@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import React from "react";
 import TaskCard from "../components/TaskCard";
 import { useGetTasksQuery } from "../services/tasksServices";
