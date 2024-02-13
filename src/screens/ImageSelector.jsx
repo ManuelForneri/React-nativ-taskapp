@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Image, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-
 import { useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/authServices";
 import { Button } from "react-native-elements";

@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
-
     paddingHorizontal: 12,
   },
   link: {
