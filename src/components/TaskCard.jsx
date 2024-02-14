@@ -2,12 +2,14 @@ import { Card, ListItem, Button, Icon } from "react-native-elements";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { colors } from "../global/colors";
 
-const TaskCard = () => {
+const TaskCard = ({ item }) => {
+  console.log("item");
+  console.log(item);
   return (
     <Card>
       <ListItem>
         <ListItem.Content>
-          <ListItem.Title>TaskCard</ListItem.Title>
+          <ListItem.Title>{item.name}</ListItem.Title>
         </ListItem.Content>
         <Button
           icon={<FontAwesome6 name="pencil" size={24} color="white" />}

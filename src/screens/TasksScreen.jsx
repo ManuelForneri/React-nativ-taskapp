@@ -4,7 +4,6 @@ import TaskCard from "../components/TaskCard";
 import { useGetTasksQuery } from "../services/tasksServices";
 import MyLoader from "../components/MyLoader";
 import { Button } from "react-native-elements";
-import { FontAwesome6 } from "@expo/vector-icons";
 import { colors } from "../global/colors";
 
 const TasksScreen = ({ navigation }) => {
@@ -15,7 +14,7 @@ const TasksScreen = ({ navigation }) => {
       {isLoading ? (
         <MyLoader />
       ) : (
-        <View>
+        <View style={styles.container}>
           <Button
             title="Añadir tarea"
             buttonStyle={{
@@ -27,7 +26,11 @@ const TasksScreen = ({ navigation }) => {
             }}
             onPress={() => navigation.navigate("Crear Tarea")}
           />
-          <TaskCard />
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <TaskCard item={item} />}
+          />
         </View>
       )}
     </>
@@ -36,4 +39,8 @@ const TasksScreen = ({ navigation }) => {
 
 export default TasksScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 50,
+  },
+});
