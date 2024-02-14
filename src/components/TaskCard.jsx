@@ -2,9 +2,7 @@ import { Card, ListItem, Button, Icon } from "react-native-elements";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { colors } from "../global/colors";
 
-const TaskCard = ({ item }) => {
-  console.log("item");
-  console.log(item);
+const TaskCard = ({ navigation, item }) => {
   return (
     <Card>
       <ListItem>
@@ -12,6 +10,7 @@ const TaskCard = ({ item }) => {
           <ListItem.Title>{item.name}</ListItem.Title>
         </ListItem.Content>
         <Button
+          onPress={() => navigation.navigate("Tarea", { id: item.id })}
           icon={<FontAwesome6 name="pencil" size={24} color="white" />}
           buttonStyle={{
             borderRadius: 3,

@@ -29,7 +29,9 @@ const TasksScreen = ({ navigation }) => {
           <FlatList
             data={data}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <TaskCard item={item} />}
+            renderItem={({ item }) => (
+              <TaskCard item={item} navigation={navigation} />
+            )}
           />
         </View>
       )}

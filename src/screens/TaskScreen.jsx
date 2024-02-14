@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const TaskScreen = () => {
+const TaskScreen = ({ route }) => {
+  const { id } = route.params;
   return (
     <View>
-      <Text>TaskScreen</Text>
+      <Text>{id}</Text>
     </View>
   );
 };
