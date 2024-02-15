@@ -4,6 +4,7 @@ import { base_url } from "../firebase/db";
 export const tasksApi = createApi({
   reducerPath: "tasksApi",
   baseQuery: fetchBaseQuery({ baseUrl: base_url }),
+  tagTypes: ["tasks"],
   endpoints: (builder) => ({
     getTasks: builder.query({
       query: () => `tasks.json`,
@@ -14,6 +15,7 @@ export const tasksApi = createApi({
         }));
         return data;
       },
+      providesTags: ["tasks"],
     }),
     getTaskById: builder.query({
       query: (id) => `tasks/${id}.json`,
@@ -24,6 +26,7 @@ export const tasksApi = createApi({
         method: "POST",
         body: task,
       }),
+      invalidatesTags: ["tasks"],
     }),
   }),
 });

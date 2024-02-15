@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useGetTaskByIdQuery } from "../services/tasksServices";
 import { Card, Badge } from "react-native-elements";
+import MyLoader from "../components/MyLoader";
 
 const TaskScreen = ({ route }) => {
   const { id } = route.params;
@@ -11,33 +12,39 @@ const TaskScreen = ({ route }) => {
     console.log(data);
   }
   if (isError) {
-    console.log(error);
+    return (
+      <View>
+        <Text>Error</Text>
+      </View>
+    );
   }
 
   return (
-    <View style={styles.container}>
-      {data ? (
-        <Card style={styles.card}>
-          <Card.Title>{data.name}</Card.Title>
-          <Card.Divider />
-          <Text style={styles.note}>{data.note}</Text>
-          <Badge
-            value={data.stateTask}
-            status={data.stateTask === "Completed" ? "success" : "warning"}
-            containerStyle={styles.badgeContainer}
-            textStyle={styles.badgeText} // Añade el estilo badgeText al texto del badge
-          />
-          <Badge
-            value={data.tag}
-            status="primary"
-            containerStyle={styles.badgeContainer}
-            textStyle={styles.badgeText} // Añade el estilo badgeText al texto del badge
-          />
-        </Card>
+    <>
+      {isLoading ? (
+        <MyLoader />
       ) : (
-        <Text style={styles.error}>Lo sentimos, hubo un error</Text>
+        <View style={styles.container}>
+          <Card style={styles.card}>
+            <Card.Title>{data.name}</Card.Title>
+            <Card.Divider />
+            <Text style={styles.note}>{data.note}</Text>
+            <Badge
+              value={data.stateTask}
+              status={data.stateTask === "Completed" ? "success" : "warning"}
+              containerStyle={styles.badgeContainer}
+              textStyle={styles.badgeText} // Añade el estilo badgeText al texto del badge
+            />
+            <Badge
+              value={data.tag}
+              status="primary"
+              containerStyle={styles.badgeContainer}
+              textStyle={styles.badgeText} // Añade el estilo badgeText al texto del badge
+            />
+          </Card>
+        </View>
       )}
-    </View>
+    </>
   );
 };
 
