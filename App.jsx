@@ -13,7 +13,21 @@ const App = () => {
       <StatusBar style="auto" />
 
       <Provider store={store}>
-        <ToastProvider>
+        <ToastProvider
+          placement="top"
+          duration={5000}
+          animationType="zoom-in"
+          animationDuration={250}
+          successColor="green"
+          dangerColor="red"
+          warningColor="orange"
+          normalColor="gray"
+          textStyle={{ fontSize: 20 }}
+          offset={50}
+          offsetTop={30}
+          offsetBottom={40}
+          swipeEnabled={true}
+        >
           <MainNavigator />
         </ToastProvider>
       </Provider>

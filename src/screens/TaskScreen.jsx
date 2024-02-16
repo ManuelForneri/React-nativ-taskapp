@@ -1,13 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { useGetTaskByIdQuery } from "../services/tasksServices";
+import {
+  useDeleteTaskMutation,
+  useGetTaskByIdQuery,
+} from "../services/tasksServices";
 import { Card, Badge, Button } from "react-native-elements";
 import MyLoader from "../components/MyLoader";
+import { useToast } from "react-native-toast-notifications";
 
-const TaskScreen = ({ route }) => {
+const TaskScreen = ({ navigation, route }) => {
+  const toast = useToast();
   const { id } = route.params;
   const { data, isError, isSuccess, error, isLoading } =
     useGetTaskByIdQuery(id);
+  const [triggerDeleteTask] = useDeleteTaskMutation();
+
   if (isSuccess && data) {
     console.log(data);
   }
@@ -20,7 +27,16 @@ const TaskScreen = ({ route }) => {
   }
 
   const onDeleteTask = () => {
-    console.log("notificacion");
+    triggerDeleteTask(id);
+
+    toast.show("Eliminado correctamente", {
+      type: "success",
+      placement: "top",
+      duration: 3000,
+      offset: 30,
+      animationType: "slide-in",
+    });
+    navigation.goBack();
   };
   return (
     <>

@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { colors } from "../global/colors";
 import { useCreateTaskMutation } from "../services/tasksServices";
 import { useSelector } from "react-redux";
+import { useToast } from "react-native-toast-notifications";
 
 const CreateTaskScreen = ({ navigation }) => {
+  const toast = useToast();
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [tag, setTag] = useState("");
@@ -20,6 +22,13 @@ const CreateTaskScreen = ({ navigation }) => {
       stateTask: "pending",
       localId,
       date: Date.now(),
+    });
+    toast.show("Creado correctamente", {
+      type: "success",
+      placement: "top",
+      duration: 3000,
+      offset: 30,
+      animationType: "slide-in",
     });
     setName("");
     setNote("");
