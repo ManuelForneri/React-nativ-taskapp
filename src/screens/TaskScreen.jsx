@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useGetTaskByIdQuery } from "../services/tasksServices";
-import { Card, Badge } from "react-native-elements";
+import { Card, Badge, Button } from "react-native-elements";
 import MyLoader from "../components/MyLoader";
 
 const TaskScreen = ({ route }) => {
@@ -19,6 +19,9 @@ const TaskScreen = ({ route }) => {
     );
   }
 
+  const onDeleteTask = () => {
+    console.log("notificacion");
+  };
   return (
     <>
       {isLoading ? (
@@ -33,13 +36,23 @@ const TaskScreen = ({ route }) => {
               value={data.stateTask}
               status={data.stateTask === "Completed" ? "success" : "warning"}
               containerStyle={styles.badgeContainer}
-              textStyle={styles.badgeText} // Añade el estilo badgeText al texto del badge
+              textStyle={styles.badgeText}
             />
             <Badge
               value={data.tag}
               status="primary"
               containerStyle={styles.badgeContainer}
-              textStyle={styles.badgeText} // Añade el estilo badgeText al texto del badge
+              textStyle={styles.badgeText}
+            />
+            <Button
+              buttonStyle={{ marginBottom: 5 }}
+              title="Terminado"
+              onPress={() => onDeleteTask()}
+            />
+            <Button
+              buttonStyle={{ backgroundColor: "red" }}
+              title="Eliminar"
+              onPress={() => onDeleteTask()}
             />
           </Card>
         </View>
