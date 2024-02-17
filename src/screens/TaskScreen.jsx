@@ -3,6 +3,7 @@ import React from "react";
 import {
   useDeleteTaskMutation,
   useGetTaskByIdQuery,
+  useUpdateTaskMutation,
 } from "../services/tasksServices";
 import { Card, Badge, Button } from "react-native-elements";
 import MyLoader from "../components/MyLoader";
@@ -14,6 +15,7 @@ const TaskScreen = ({ navigation, route }) => {
   const { data, isError, isSuccess, error, isLoading } =
     useGetTaskByIdQuery(id);
   const [triggerDeleteTask] = useDeleteTaskMutation();
+  const [triggerUpdateTask] = useUpdateTaskMutation();
 
   if (isSuccess && data) {
     console.log(data);
@@ -30,6 +32,18 @@ const TaskScreen = ({ navigation, route }) => {
     triggerDeleteTask(id);
 
     toast.show("Eliminado correctamente", {
+      type: "success",
+      placement: "top",
+      duration: 3000,
+      offset: 30,
+      animationType: "slide-in",
+    });
+    navigation.goBack();
+  };
+  const onUpdateTask = () => {
+    const task = { stateTask: "Completed" };
+    triggerUpdateTask({ task, id });
+    toast.show("Cambiando estado correctamente", {
       type: "success",
       placement: "top",
       duration: 3000,
@@ -63,7 +77,7 @@ const TaskScreen = ({ navigation, route }) => {
             <Button
               buttonStyle={{ marginBottom: 5 }}
               title="Terminado"
-              onPress={() => onDeleteTask()}
+              onPress={() => onUpdateTask()}
             />
             <Button
               buttonStyle={{ backgroundColor: "red" }}

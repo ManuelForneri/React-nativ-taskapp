@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useSignupMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { signupSchema } from "../validations/signupSchema";
+import { colors } from "../global/colors";
+import { Button } from "react-native-elements";
 
 const RegisterScreen = ({ navigation }) => {
   const [triggerSignup, { data, isError, isSuccess, error, isLoading }] =
@@ -89,7 +91,11 @@ const RegisterScreen = ({ navigation }) => {
         onChangeText={(text) => setRepeatPassword(text)}
       />
       <Text style={styles.errorMsg}>{errorRepeatPass}</Text>
-      <Button title="Registrarse" onPress={handleRegister} />
+      <Button
+        title="Registrarse"
+        onPress={handleRegister}
+        buttonStyle={{ backgroundColor: colors.fuchsiablue500 }}
+      />
       <Text style={styles.link} onPress={() => navigation.navigate("Login")}>
         ¿Ya tienes cuenta? Inicia sesión aquí
       </Text>
@@ -111,11 +117,16 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderRadius: 8,
     paddingHorizontal: 12,
+    backgroundColor: colors.fuchsiablue200,
   },
   link: {
     color: "blue",
-    textDecorationLine: "underline",
+    textDecorationLine: "none",
     marginTop: 8,
+    backgroundColor: colors.fuchsiablue500,
+    padding: 10,
+    borderRadius: 3,
+    color: "#fff",
   },
   errorMsg: {
     color: "red",

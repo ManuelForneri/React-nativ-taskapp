@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useLoginMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
+import { colors } from "../global/colors";
+import { Button } from "react-native-elements";
 
 const LoginScreen = ({ navigation }) => {
   const [triggerSignin, { data, isError, isSuccess, error, isLoading }] =
@@ -42,7 +44,11 @@ const LoginScreen = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Button title="Iniciar sesión" onPress={handleLogin} />
+      <Button
+        title="Iniciar sesión"
+        onPress={handleLogin}
+        buttonStyle={{ backgroundColor: colors.fuchsiablue500 }}
+      />
       <Text style={styles.link} onPress={() => navigation.navigate("Register")}>
         ¿No tienes cuenta? Regístrate aquí
       </Text>
@@ -65,11 +71,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 16,
     paddingHorizontal: 12,
+    backgroundColor: colors.fuchsiablue200,
   },
   link: {
-    color: "blue",
-    textDecorationLine: "underline",
+    textDecorationLine: "none",
     marginTop: 8,
+    backgroundColor: colors.fuchsiablue500,
+    padding: 10,
+    borderRadius: 3,
+    color: "#fff",
   },
 });
 
