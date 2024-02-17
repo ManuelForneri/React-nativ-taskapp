@@ -4,7 +4,8 @@ import { base_url } from "../firebase/db";
 export const tasksApi = createApi({
   reducerPath: "tasksApi",
   baseQuery: fetchBaseQuery({ baseUrl: base_url }),
-  tagTypes: ["tasks"],
+  tagTypes: ["tasks", "taskById"],
+
   endpoints: (builder) => ({
     getTasks: builder.query({
       query: () => `tasks.json`,
@@ -19,6 +20,7 @@ export const tasksApi = createApi({
     }),
     getTaskById: builder.query({
       query: (id) => `tasks/${id}.json`,
+      providesTags: ["taskById"],
     }),
     createTask: builder.mutation({
       query: (task) => ({
@@ -41,7 +43,7 @@ export const tasksApi = createApi({
         method: "PATCH",
         body: task,
       }),
-      invalidatesTags: ["tasks"],
+      invalidatesTags: ["tasks", "taskById"],
     }),
   }),
 });
