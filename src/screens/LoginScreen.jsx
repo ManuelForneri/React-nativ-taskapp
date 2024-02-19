@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { colors } from "../global/colors";
 import { Button } from "react-native-elements";
+import { insertSession } from "../database";
 
 const LoginScreen = ({ navigation }) => {
   const [triggerSignin, { data, isError, isSuccess, error, isLoading }] =
@@ -14,8 +15,10 @@ const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (data) {
-      console.log(data);
       dispatch(setUser(data));
+      insertSession(data)
+        .then((result) => console.log(result))
+        .catch((error) => console.log(error));
     }
     if (error) {
       console.log(error);
@@ -23,9 +26,6 @@ const LoginScreen = ({ navigation }) => {
   }, [data, isError, isSuccess]);
 
   const handleLogin = () => {
-    // Lógica de autenticación aquí (por ejemplo, llamada a una API).
-    console.log("Correo electrónico:", email);
-    console.log("Contraseña:", password);
     triggerSignin({ email, password });
   };
 

@@ -1,13 +1,14 @@
-import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
+import { ToastProvider } from "react-native-toast-notifications";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";
-import { fonts } from "./src/global/fonts";
 import MainNavigator from "./src/navigations/MainNavigator";
-import { ToastProvider } from "react-native-toast-notifications";
+import { init } from "./src/database";
 
 const App = () => {
-  const [fontsLoader] = useFonts(fonts);
+  init()
+    .then(() => console.log("db inicialisada correctamente"))
+    .catch((error) => console.log(error));
   return (
     <>
       <StatusBar style="auto" />
