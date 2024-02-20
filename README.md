@@ -75,10 +75,10 @@ const Navigator = () => {
 };
 ```
 
-- **Pestaña 1 - Productos:** Categorías y productos (stack principal).
-- **Pestaña 2 - Carrito:** Detalles del carrito de compras con resumen y botón para finalizar la orden.
-- **Pestaña 3 - Órdenes:** Historial de órdenes realizadas.
-- **Pestaña 4 - Perfil:** Información del usuario, ubicación y carga de imagen de perfil.
+- **Pestaña 1 - Tareas:**
+- **Pestaña 2 - :Deudas** para finalizar la orden.
+- **Pestaña 3 - Anotaciones:**
+- **Pestaña 4 - Perfil:** Información del usuario, con carga de imagen de perfil.
 
 <img src="./screenshot/Screenshot_1705910459.png" width="300" >
 <img src="./screenshot/Screenshot_1705910463.png" width="300" >
@@ -88,21 +88,21 @@ const Navigator = () => {
 - **Firebase Authentication:** Implementa el sistema de autenticación de Firebase para gestionar la seguridad de la aplicación.
 - **React Native Navigation Stack:** Gestiona la navegación entre pantallas.
 - **React Native Navigation Buttom tap:** Gestiona la navegación entre pestañas.
-- **Expo-Location:** Permite acceder y gestionar la ubicación del usuario.
+- **React nativ elements** Componentes con estilos.
 - **Expo-Picker-Image:** Facilita la carga de imágenes de perfil.
 - **Redux:** Centraliza y gestiona el estado de la aplicación.
 - **RTK Query y Firebase:** Realiza operaciones de lectura/escritura en la base de datos.
 
 ## Instalación
 
-1. Clona el repositorio: `git clone https://github.com/tu-usuario/tu-aplicacion.git`
+1. Clona el repositorio: `git clone https://github.com/ManuelForneri/React-nativ-taskapp.git`
 2. Instala las dependencias: `npm install`
-3. Configura las claves de API para servicios externos (Expo-Location, Firebase, etc.).
+3. Configura las claves de API para servicios externos (Firebase, etc.).
 4. Configura las credenciales de Firebase en tu proyecto.
 5. Ejecuta la aplicación: `npm start`
 
-## Contacto
+## Contacto / comentarios
 
-Para preguntas o soporte, contacta a [tu-email@example.com].
+Para preguntas o sugerencias, contactase a manuelforneri@gmail.com.
 
 ---
