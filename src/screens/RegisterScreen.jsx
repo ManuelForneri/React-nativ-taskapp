@@ -6,6 +6,7 @@ import { setUser } from "../features/auth/authSlice";
 import { signupSchema } from "../validations/signupSchema";
 import { colors } from "../global/colors";
 import { Button } from "react-native-elements";
+import { insertSession } from "../database";
 
 const RegisterScreen = ({ navigation }) => {
   const [triggerSignup, { data, isError, isSuccess, error, isLoading }] =
@@ -22,8 +23,10 @@ const RegisterScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       dispatch(setUser(data));
+      insertSession(data)
+        .then((result) => console.log(result))
+        .catch((error) => console.log(error));
     }
     if (error) {
       console.log(error);

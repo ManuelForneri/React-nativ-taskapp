@@ -17,9 +17,6 @@ const TaskScreen = ({ navigation, route }) => {
   const [triggerDeleteTask] = useDeleteTaskMutation();
   const [triggerUpdateTask] = useUpdateTaskMutation();
 
-  if (isSuccess && data) {
-    console.log(data);
-  }
   if (isError) {
     return (
       <View>

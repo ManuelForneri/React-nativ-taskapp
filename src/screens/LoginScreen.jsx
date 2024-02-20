@@ -13,15 +13,13 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (data) {
       dispatch(setUser(data));
       insertSession(data)
         .then((result) => console.log(result))
         .catch((error) => console.log(error));
-    }
-    if (error) {
-      console.log(error);
     }
   }, [data, isError, isSuccess]);
 
