@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "taskapp",
-    "slug": "taskapp",
+    "name": "Tasky",
+    "slug": "Tasky",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.manuelforneri.taskapp"
@@ -28,13 +26,12 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-font"
-    ],
+    "plugins": ["expo-font"],
     "extra": {
       "eas": {
         "projectId": "7cfb022c-fba6-48a2-940c-374e7d762451"
       }
-    }
+    },
+    "author": "Manuel Forneri"
   }
 }

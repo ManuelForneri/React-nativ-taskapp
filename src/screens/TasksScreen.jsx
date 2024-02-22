@@ -5,9 +5,15 @@ import { useGetTasksQuery } from "../services/tasksServices";
 import MyLoader from "../components/MyLoader";
 import { Button } from "react-native-elements";
 import { colors } from "../global/colors";
+import { useSelector } from "react-redux";
 
 const TasksScreen = ({ navigation }) => {
+  const localId = useSelector((state) => state.auth.value.localId);
   const { data, error, isLoading } = useGetTasksQuery();
+
+  const filteredData = data?.filter((task) => task.localId === localId);
+  console.log("soy la data filtrada");
+  console.log(filteredData);
 
   return (
     <>
@@ -27,7 +33,7 @@ const TasksScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("Crear Tarea")}
           />
           <FlatList
-            data={data}
+            data={filteredData}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TaskCard item={item} navigation={navigation} />
