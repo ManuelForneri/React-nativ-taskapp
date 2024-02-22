@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Avatar, Button, Divider } from "react-native-elements";
+import { View, StyleSheet } from "react-native";
+import { Avatar, Button, Divider } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/authServices";
 import MyLoader from "../components/MyLoader";
@@ -24,24 +24,26 @@ const ProfileScreen = ({ navigation }) => {
         <MyLoader />
       ) : (
         <View style={styles.container}>
-          <Avatar
-            rounded
-            size="xlarge"
+          <Avatar.Image
+            size={128}
             source={
               data ? { uri: data.image } : require("../../assets/user.png")
             }
           />
 
-          <Divider style={styles.divider} />
           <Button
-            title="Editar perfil"
+            mode="contained"
             onPress={() => navigation.navigate("Editar Perfil")}
-          />
+          >
+            Editar perfil
+          </Button>
           <Button
-            buttonStyle={{ backgroundColor: "red" }}
-            title="Cerrar sesion"
+            mode="contained"
+            buttonColor="#D32F2F"
             onPress={() => onLogout()}
-          />
+          >
+            Cerrar sesion
+          </Button>
         </View>
       )}
     </>
@@ -55,19 +57,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 16,
     gap: 10,
-  },
-  username: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginVertical: 8,
-  },
-  bio: {
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 16,
-  },
-  divider: {
-    marginVertical: 16,
   },
 });
 

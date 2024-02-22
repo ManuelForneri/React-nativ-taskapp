@@ -3,8 +3,7 @@ import React from "react";
 import TaskCard from "../components/TaskCard";
 import { useGetTasksQuery } from "../services/tasksServices";
 import MyLoader from "../components/MyLoader";
-import { Button } from "react-native-elements";
-import { colors } from "../global/colors";
+import { Button } from "react-native-paper";
 import { useSelector } from "react-redux";
 
 const TasksScreen = ({ navigation }) => {
@@ -12,8 +11,6 @@ const TasksScreen = ({ navigation }) => {
   const { data, error, isLoading } = useGetTasksQuery();
 
   const filteredData = data?.filter((task) => task.localId === localId);
-  console.log("soy la data filtrada");
-  console.log(filteredData);
 
   return (
     <>
@@ -22,16 +19,11 @@ const TasksScreen = ({ navigation }) => {
       ) : (
         <View style={styles.container}>
           <Button
-            title="Añadir tarea"
-            buttonStyle={{
-              borderRadius: 3,
-              marginLeft: 0,
-              marginRight: 0,
-              marginBottom: 0,
-              backgroundColor: colors.fuchsiablue500,
-            }}
+            mode="contained"
             onPress={() => navigation.navigate("Crear Tarea")}
-          />
+          >
+            Añadir tarea
+          </Button>
           <FlatList
             data={filteredData}
             keyExtractor={(item) => item.id}
@@ -49,6 +41,8 @@ export default TasksScreen;
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 50,
+    flex: 1,
+    justifyContent: "center",
+    padding: 10,
   },
 });

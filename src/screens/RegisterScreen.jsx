@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useSignupMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { signupSchema } from "../validations/signupSchema";
-import { colors } from "../global/colors";
-import { Button } from "react-native-elements";
+import { Button, Text, TextInput } from "react-native-paper";
 import { insertSession } from "../database";
 
 const RegisterScreen = ({ navigation }) => {
@@ -63,77 +62,56 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 16,
+      }}
+    >
       <TextInput
-        style={styles.input}
-        placeholder="Nombre completo"
+        mode="outlined"
+        label="Nombre completo"
         value={name}
         onChangeText={(text) => setName(text)}
+        style={{ width: "100%" }}
       />
-      <Text style={styles.errorMsg}>{errorName}</Text>
+      <Text style={{ color: "red" }}>{errorName}</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Correo electrónico"
+        mode="outlined"
+        label="Correo electrónico"
         value={email}
         onChangeText={(text) => setEmail(text)}
+        style={{ width: "100%" }}
       />
-      <Text style={styles.errorMsg}>{errorEmail}</Text>
+      <Text style={{ color: "red" }}>{errorEmail}</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Contraseña"
+        mode="outlined"
+        label="Contraseña"
         secureTextEntry
         value={password}
         onChangeText={(text) => setPassword(text)}
+        style={{ width: "100%" }}
       />
-      <Text style={styles.errorMsg}>{errorPassword}</Text>
+      <Text style={{ color: "red" }}>{errorPassword}</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Repetir contraseña"
+        mode="outlined"
+        label="Repetir contraseña"
         secureTextEntry
         value={repeatPassword}
         onChangeText={(text) => setRepeatPassword(text)}
+        style={{ width: "100%" }}
       />
-      <Text style={styles.errorMsg}>{errorRepeatPass}</Text>
-      <Button
-        title="Registrarse"
-        onPress={handleRegister}
-        buttonStyle={{ backgroundColor: colors.fuchsiablue500 }}
-      />
-      <Text style={styles.link} onPress={() => navigation.navigate("Login")}>
+      <Text style={{ color: "red" }}>{errorRepeatPass}</Text>
+      <Button mode="contained" onPress={handleRegister}>
+        Registrarse
+      </Button>
+      <Button mode="text" onPress={() => navigation.navigate("Login")}>
         ¿Ya tienes cuenta? Inicia sesión aquí
-      </Text>
+      </Button>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
-  },
-  input: {
-    width: "100%",
-    height: 40,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    backgroundColor: colors.fuchsiablue200,
-  },
-  link: {
-    color: "blue",
-    textDecorationLine: "none",
-    marginTop: 8,
-    backgroundColor: colors.fuchsiablue500,
-    padding: 10,
-    borderRadius: 3,
-    color: "#fff",
-  },
-  errorMsg: {
-    color: "red",
-  },
-});
 
 export default RegisterScreen;

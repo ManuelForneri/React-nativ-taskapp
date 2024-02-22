@@ -1,12 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import {
   useDeleteTaskMutation,
   useGetTaskByIdQuery,
   useUpdateTaskMutation,
 } from "../services/tasksServices";
-import { Card, Badge, Button } from "react-native-elements";
-import MyLoader from "../components/MyLoader";
+import {
+  ActivityIndicator,
+  Button,
+  Card,
+  Title,
+  Paragraph,
+  Badge,
+} from "react-native-paper";
 import { useToast } from "react-native-toast-notifications";
 
 const TaskScreen = ({ navigation, route }) => {
@@ -52,35 +58,35 @@ const TaskScreen = ({ navigation, route }) => {
   return (
     <>
       {isLoading ? (
-        <MyLoader />
+        <ActivityIndicator animating={true} color={"#6200ee"} />
       ) : (
         <View style={styles.container}>
           <Card style={styles.card}>
-            <Card.Title>{data.name}</Card.Title>
-            <Card.Divider />
-            <Text style={styles.note}>{data.note}</Text>
-            <Badge
-              value={data.stateTask}
-              status={data.stateTask === "Completed" ? "success" : "warning"}
-              containerStyle={styles.badgeContainer}
-              textStyle={styles.badgeText}
-            />
-            <Badge
-              value={data.tag}
-              status="primary"
-              containerStyle={styles.badgeContainer}
-              textStyle={styles.badgeText}
-            />
-            <Button
-              buttonStyle={{ marginBottom: 5 }}
-              title="Terminado"
-              onPress={() => onUpdateTask()}
-            />
-            <Button
-              buttonStyle={{ backgroundColor: "red" }}
-              title="Eliminar"
-              onPress={() => onDeleteTask()}
-            />
+            <Card.Content>
+              <Title>{data.name}</Title>
+              <Paragraph style={styles.note}>{data.note}</Paragraph>
+              <Badge style={styles.badge}>{data.tag}</Badge>
+              <Badge
+                style={{
+                  backgroundColor:
+                    data.stateTask === "Completed" ? "green" : "orange",
+                }}
+              >
+                {data.stateTask}
+              </Badge>
+            </Card.Content>
+            <Card.Actions>
+              <Button mode="contained" onPress={() => onUpdateTask()}>
+                Terminado
+              </Button>
+              <Button
+                mode="contained"
+                color="red"
+                onPress={() => onDeleteTask()}
+              >
+                Eliminar
+              </Button>
+            </Card.Actions>
           </Card>
         </View>
       )}
@@ -102,20 +108,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
   },
-  badgeContainer: {
+  badge: {
     margin: 5,
   },
-  error: {
-    color: "red",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
   card: {
-    width: 500,
-    height: 500,
-  },
-  badgeText: {
-    fontSize: 10,
-    fontWeight: "bold",
+    width: "100%",
+    maxWidth: 500,
   },
 });
