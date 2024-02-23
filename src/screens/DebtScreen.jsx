@@ -4,7 +4,7 @@ import React from "react";
 const DebtScreen = () => {
   return (
     <View>
-      <Text>DebtScreen</Text>
+      <Text>Proximamente</Text>
     </View>
   );
 };

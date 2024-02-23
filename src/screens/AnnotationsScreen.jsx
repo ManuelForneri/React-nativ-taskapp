@@ -4,7 +4,7 @@ import React from "react";
 const AnnotationsScreen = () => {
   return (
     <View>
-      <Text>AnnotationsScreen</Text>
+      <Text>Proximamente</Text>
     </View>
   );
 };
