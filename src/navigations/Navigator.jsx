@@ -19,7 +19,7 @@ const Navigator = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Deudas"
         component={DebtStack}
         options={{
@@ -34,7 +34,7 @@ const Navigator = () => {
         options={{
           tabBarIcon: () => <FontAwesome name="book" size={24} color="black" />,
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Perfil"
         component={ProfileStack}
