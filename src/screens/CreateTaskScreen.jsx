@@ -1,6 +1,6 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { View } from "react-native";
+import { Button, TextInput } from "react-native-paper";
 import React, { useState } from "react";
-import { colors } from "../global/colors";
 import { useCreateTaskMutation } from "../services/tasksServices";
 import { useSelector } from "react-redux";
 import { useToast } from "react-native-toast-notifications";
@@ -37,51 +37,41 @@ const CreateTaskScreen = ({ navigation }) => {
     navigation.goBack();
   };
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 16,
+      }}
+    >
       <TextInput
-        style={styles.input}
+        mode="outlined"
+        label="Nombre de la tarea"
         value={name}
         onChangeText={(t) => setName(t)}
-        placeholder="Nombre de la tarea"
+        style={{ marginBottom: 10, width: "100%" }}
       />
       <TextInput
-        style={styles.input}
+        mode="outlined"
+        label="Etiqueta"
         value={tag}
         onChangeText={(t) => setTag(t)}
-        placeholder="Etiqueta"
+        style={{ marginBottom: 10, width: "100%" }}
       />
       <TextInput
-        style={styles.input}
+        mode="outlined"
+        label="Descripcion"
         value={note}
         onChangeText={(t) => setNote(t)}
-        placeholder="Descripcion"
+        style={{ marginBottom: 10, width: "100%" }}
       />
 
-      <Button
-        color={colors.fuchsiablue800}
-        title="Agregar"
-        onPress={() => onCreateTask()}
-      />
+      <Button mode="contained" onPress={() => onCreateTask()}>
+        Agregar
+      </Button>
     </View>
   );
 };
 
 export default CreateTaskScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
-    gap: 10,
-  },
-  input: {
-    width: "100%",
-    height: 40,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    paddingHorizontal: 12,
-  },
-});

@@ -3,7 +3,7 @@ import { StyleSheet, Image, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/authServices";
-import { Button } from "react-native-elements";
+import { Button, Card } from "react-native-paper";
 import { usePostProfileImageMutation } from "../services/authServices";
 import MyLoader from "../components/MyLoader";
 
@@ -45,13 +45,16 @@ const ImageSelector = ({ navigation }) => {
         <MyLoader />
       ) : (
         <View style={styles.container}>
-          <Image
+          <Card.Cover
             source={image ? { uri: image } : require("../../assets/user.png")}
             style={styles.image}
-            resizeMode="cover"
           />
-          <Button title="Tomar foto" onPress={pickImage} />
-          <Button title="Confirmar" onPress={confirmImage} />
+          <Button mode="contained" onPress={pickImage}>
+            Tomar foto
+          </Button>
+          <Button mode="contained" buttonColor="#66BB6A" onPress={confirmImage}>
+            Confirmar
+          </Button>
         </View>
       )}
     </>
@@ -64,12 +67,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 20,
+    justifyContent: "center",
+    padding: 10,
     gap: 10,
   },
   image: {
-    width: 200,
+    width: "100%",
     height: 200,
   },
-  text: {},
 });
