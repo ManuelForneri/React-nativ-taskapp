@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Tasky",
-    "slug": "Tasky",
+    "slug": "taskapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/favicon.jpeg",
