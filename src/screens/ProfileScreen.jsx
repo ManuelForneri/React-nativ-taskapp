@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { Avatar, Button, Divider } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/authServices";
@@ -14,8 +14,23 @@ const ProfileScreen = ({ navigation }) => {
   const { data, isLoading } = useGetProfileImageQuery(localId);
 
   const onLogout = () => {
-    deleteAllSession(localId);
-    dispatch(clearUser());
+    Alert.alert(
+      "Cerrar sesión",
+      "¿Estás seguro de que quieres cerrar la sesión?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            deleteAllSession(localId);
+            dispatch(clearUser());
+          },
+        },
+      ]
+    );
   };
 
   return (

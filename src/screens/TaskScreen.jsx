@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import React from "react";
 import {
   useDeleteTaskMutation,
@@ -32,17 +32,32 @@ const TaskScreen = ({ navigation, route }) => {
   }
 
   const onDeleteTask = () => {
-    triggerDeleteTask(id);
-
-    toast.show("Eliminado correctamente", {
-      type: "success",
-      placement: "top",
-      duration: 3000,
-      offset: 30,
-      animationType: "slide-in",
-    });
-    navigation.goBack();
+    Alert.alert(
+      "Eliminar tarea",
+      "¿Estás seguro de que quieres eliminar esta tarea?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            triggerDeleteTask(id);
+            toast.show("Eliminado correctamente", {
+              type: "success",
+              placement: "top",
+              duration: 3000,
+              offset: 30,
+              animationType: "slide-in",
+            });
+            navigation.goBack();
+          },
+        },
+      ]
+    );
   };
+
   const onUpdateTask = () => {
     const task = { stateTask: "Completed" };
     triggerUpdateTask({ task, id });
@@ -55,6 +70,7 @@ const TaskScreen = ({ navigation, route }) => {
     });
     navigation.goBack();
   };
+
   return (
     <>
       {isLoading ? (
